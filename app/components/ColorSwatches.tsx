@@ -1,11 +1,14 @@
+import { useRouteLoaderData } from "@remix-run/react";
+import type {RootLoader} from '~/root';
+
 type ColorSwatchesProps = {
   colors: string[];
   selectedColor?: string;
   onSelectColor?: (color: string) => void;
 };
 
-// Color mapping with hex values
-const COLOR_MAP: Record<string, string> = {
+// TODO: Move to constants file
+const DEFAULT_COLOR_MAP: Record<string, string> = {
   orange: '#FF6633',
   green: '#006600',
   blue: '#00639C',
@@ -18,6 +21,20 @@ const COLOR_MAP: Record<string, string> = {
 const COLOR_ORDER = ['orange', 'green', 'blue', 'yellow', 'pink', 'navy'];
 
 export function ColorSwatches({colors, selectedColor, onSelectColor}: ColorSwatchesProps) {
+  const rootData = useRouteLoaderData<RootLoader>('root');
+  const colorPalette = rootData?.colorPalette;
+
+  const COLOR_MAP = (colorPalette?.metaobjects.edges.reduce((acc, edge) => {
+    const label = edge.node.label?.value?.toLowerCase();
+    const color = edge.node.color?.value;
+
+    if (label && color) {
+      acc[label] = color;
+    }
+
+    return acc;
+  }, {} as Record<string, string>) ?? DEFAULT_COLOR_MAP);
+
   // Sort colors according to the predefined order
   const sortedColors = [...colors].sort((a, b) => {
     const aIndex = COLOR_ORDER.indexOf(a.toLowerCase());

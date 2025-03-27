@@ -1,4 +1,4 @@
-import {Link} from '@remix-run/react';
+import {Link, useRouteLoaderData} from '@remix-run/react';
 import {Money} from '@shopify/hydrogen';
 import type {RecommendedProductsQuery} from 'storefrontapi.generated';
 import {ColorSwatches} from './ColorSwatches';
@@ -26,6 +26,7 @@ export function ProductCard({
   variants,
   isOnSale = false,
 }: ProductCardProps) {
+  const rootData = useRouteLoaderData('root');
   const [selectedVariant, setSelectedVariant] = useState(variants[0]);
   
   // Extract colors from variant titles
@@ -51,8 +52,8 @@ export function ProductCard({
   
   return (
     <div>
-      <div className="border border-[#E8E8E8] rounded-[10px] overflow-hidden">
-        <Link key={id} className="recommended-product block" to={`/products/${handle}`}>
+      <div className="border border-[#E8E8E8] rounded-[10px] overflow-hidden aspect-square">
+        <Link key={id} className="recommended-product block h-full" to={`/products/${handle}`}>
           {variantImage && (
             <HoverableImage
               imageUrl={variantImage.url}

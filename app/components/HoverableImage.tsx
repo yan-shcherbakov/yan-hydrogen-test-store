@@ -19,6 +19,9 @@ export function HoverableImage({
   const [isHovering, setIsHovering] = useState(false);
   const [hoverImageLoaded, setHoverImageLoaded] = useState(false);
 
+  // Calculate aspect ratio
+  const aspectRatio = (height / width) * 100;
+
   // Preload hover image only on client side
   useEffect(() => {
     if (hoverImageUrl) {
@@ -32,13 +35,14 @@ export function HoverableImage({
 
   return (
     <div
-      className="relative w-full h-full"
+      className="relative w-full"
+      style={{ paddingBottom: `${aspectRatio}%` }}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
       {/* Main image */}
       <div
-        className={`transition-opacity duration-300 ${
+        className={`absolute inset-0 transition-opacity duration-300 ${
           isHovering && hoverImageUrl && hoverImageLoaded
             ? 'opacity-0'
             : 'opacity-100'
