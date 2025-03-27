@@ -6,6 +6,7 @@ import {useState} from 'react';
 
 type ProductCardProps = {
   id: string;
+  vendor: string;
   handle: string;
   title: string;
   variants: RecommendedProductsQuery['products']['nodes'][number]['variants']['nodes'];
@@ -18,6 +19,7 @@ export function ProductCard({
   id,
   handle,
   title,
+  vendor,
   images,
   priceRange,
   variants,
@@ -40,18 +42,18 @@ export function ProductCard({
   };
 
   // Find selected variant image or use the first image as fallback
-  const variantImage = images.find(
-    (image) => image.id === selectedVariant?.image?.id
-  ) || images[0];
+  const variantImage = selectedVariant?.image || images[0];
   
   return (
     <div>
       <div className="border border-[#E8E8E8] rounded-[10px] overflow-hidden">
+      <Link key={id} className="recommended-product" to={`/products/${handle}`}>
         <Image
           data={variantImage}
           aspectRatio="1/1"
           sizes="(min-width: 45em) 20vw, 50vw"
         />
+        </Link>
       </div>
       <div className="mt-2">
         <ColorSwatches 
@@ -60,13 +62,12 @@ export function ProductCard({
           onSelectColor={handleColorSelect}
         />
       </div>
-      <Link key={id} className="recommended-product" to={`/products/${handle}`}>
-        <h6>Good Brand Company</h6>
+        <h6>{vendor}</h6>
         <h4>{title}</h4>
         <small>
           <Money data={priceRange.minVariantPrice} />
         </small>
-      </Link>
+      
     </div>
   );
 }

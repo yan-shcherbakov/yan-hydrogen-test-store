@@ -21,6 +21,7 @@ export function RecommendedProducts({
                       key={product.id}
                       id={product.id}
                       handle={product.handle}
+                      vendor={product.vendor}
                       title={product.title}
                       images={product.images.nodes}
                       priceRange={product.priceRange}
