@@ -24,6 +24,7 @@ export function RecommendedProducts({
                       title={product.title}
                       images={product.images.nodes}
                       priceRange={product.priceRange}
+                      variants={product.variants.nodes}
                     />
                   ))
                 : null}
