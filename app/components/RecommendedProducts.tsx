@@ -1,7 +1,7 @@
-import {Await, Link} from '@remix-run/react';
+import {Await} from '@remix-run/react';
 import {Suspense} from 'react';
-import {Image, Money} from '@shopify/hydrogen';
 import type {RecommendedProductsQuery} from 'storefrontapi.generated';
+import { ProductCard } from './ProductCard';
 
 export function RecommendedProducts({
   products,
@@ -16,23 +16,7 @@ export function RecommendedProducts({
           {(response) => (
             <div className="recommended-products-grid">
               {response
-                ? response.products.nodes.map((product) => (
-                    <Link
-                      key={product.id}
-                      className="recommended-product"
-                      to={`/products/${product.handle}`}
-                    >
-                      <Image
-                        data={product.images.nodes[0]}
-                        aspectRatio="1/1"
-                        sizes="(min-width: 45em) 20vw, 50vw"
-                      />
-                      <h4>{product.title}</h4>
-                      <small>
-                        <Money data={product.priceRange.minVariantPrice} />
-                      </small>
-                    </Link>
-                  ))
+                ? response.products.nodes.map((product) => <ProductCard key={product.id} id={product.id} handle={product.handle} title={product.title} images={product.images.nodes} priceRange={product.priceRange} />)
                 : null}
             </div>
           )}
