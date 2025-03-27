@@ -35,19 +35,6 @@ export function ColorSwatches({colors, selectedColor, onSelectColor}: ColorSwatc
     return acc;
   }, {} as Record<string, string>) ?? DEFAULT_COLOR_MAP);
 
-  // Sort colors according to the predefined order
-  // const sortedColors = [...colors].sort((a, b) => {
-  //   const aIndex = COLOR_ORDER.indexOf(a.toLowerCase());
-  //   const bIndex = COLOR_ORDER.indexOf(b.toLowerCase());
-    
-  //   // Colors not in the predefined order go to the end
-  //   if (aIndex === -1 && bIndex === -1) return 0;
-  //   if (aIndex === -1) return 1;
-  //   if (bIndex === -1) return -1;
-    
-  //   return aIndex - bIndex;
-  // });
-
   return (
     <div className="flex gap-2">
       {colors.map((color) => {
