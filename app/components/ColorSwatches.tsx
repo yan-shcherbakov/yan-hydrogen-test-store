@@ -17,9 +17,6 @@ const DEFAULT_COLOR_MAP: Record<string, string> = {
   navy: '#19264B',
 };
 
-// TODO: This order should be defined in a metafield in the future for better customization
-// const COLOR_ORDER = ['orange', 'green', 'blue', 'yellow', 'pink', 'navy'];
-
 export function ColorSwatches({colors, selectedColor, onSelectColor}: ColorSwatchesProps) {
   const rootData = useRouteLoaderData<RootLoader>('root');
   const colorPalette = rootData?.colorPalette;

@@ -13,8 +13,8 @@ type ProductCardProps = {
   title: string;
   variants: RecommendedProductsQuery['products']['nodes'][number]['variants']['nodes'];
   images: RecommendedProductsQuery['products']['nodes'][number]['images']['nodes'];
-  priceRange: RecommendedProductsQuery['products']['nodes'][number]['priceRange'];
-  isOnSale?: boolean;
+  price: RecommendedProductsQuery['products']['nodes'][number]['priceRange'];
+  originalPrice: RecommendedProductsQuery['products']['nodes'][number]['compareAtPriceRange'];
 };
 
 export function ProductCard({
@@ -23,9 +23,9 @@ export function ProductCard({
   title,
   vendor,
   images,
-  priceRange,
+  price,
+  originalPrice,
   variants,
-  isOnSale = true,
 }: ProductCardProps) {
   const [selectedVariant, setSelectedVariant] = useState(variants[0]);
   
@@ -50,10 +50,12 @@ export function ProductCard({
   const hoverImageValue = selectedVariant?.hoverImage?.reference?.image?.url;
   const hoverImageUrl = hoverImageValue ?? null;
   
+  const isOnSale = Number(originalPrice?.minVariantPrice?.amount) > Number(price?.minVariantPrice?.amount);
+
   return (
     <div className="flex flex-col gap-3">
       <div className="border border-[#E8E8E8] rounded-[10px] overflow-hidden aspect-square relative p-[20px]">
-        {isOnSale && <Badge className="absolute top-5 left-5 z-10" />}
+        {isOnSale && <Badge className="absolute top-4 left-4 z-10" />}
         <Link key={id} className="recommended-product block h-full" to={`/products/${handle}`}>
           {variantImage && (
             <HoverableImage
@@ -76,7 +78,10 @@ export function ProductCard({
       <div className="flex flex-col gap-1">
         <p>{vendor}</p>
         <h2 className="text-[var(--color-title-blue)]">{title}</h2>
-        <Money data={priceRange.minVariantPrice} />
+        <div className="flex gap-1">
+          {isOnSale && <Money className="line-through" data={originalPrice.minVariantPrice} />}
+          <Money className={`${isOnSale ? 'text-[var(--color-sale)]' : ''}`} data={price.minVariantPrice} />
+        </div>
       </div>
     </div>
   );

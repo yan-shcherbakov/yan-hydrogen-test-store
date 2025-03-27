@@ -24,7 +24,8 @@ export function RecommendedProducts({
                       vendor={product.vendor}
                       title={product.title}
                       images={product.images.nodes}
-                      priceRange={product.priceRange}
+                      price={product.priceRange}
+                      originalPrice={product.compareAtPriceRange}
                       variants={product.variants.nodes}
                     />
                   ))

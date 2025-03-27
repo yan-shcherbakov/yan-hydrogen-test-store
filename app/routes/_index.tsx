@@ -117,6 +117,12 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
     title
     handle
     vendor
+    compareAtPriceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+    }
     priceRange {
       minVariantPrice {
         amount
