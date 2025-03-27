@@ -1,8 +1,9 @@
 import {Link} from '@remix-run/react';
-import {Image, Money} from '@shopify/hydrogen';
+import {Money} from '@shopify/hydrogen';
 import type {RecommendedProductsQuery} from 'storefrontapi.generated';
 import {ColorSwatches} from './ColorSwatches';
 import {useState} from 'react';
+import {HoverableImage} from './HoverableImage';
 
 type ProductCardProps = {
   id: string;
@@ -44,15 +45,23 @@ export function ProductCard({
   // Find selected variant image or use the first image as fallback
   const variantImage = selectedVariant?.image || images[0];
   
+  // Get hover image from metafield
+  const hoverImageValue = selectedVariant?.hoverImage?.reference?.image?.url;
+  const hoverImageUrl = hoverImageValue ?? null;
+  
   return (
     <div>
       <div className="border border-[#E8E8E8] rounded-[10px] overflow-hidden">
-      <Link key={id} className="recommended-product" to={`/products/${handle}`}>
-        <Image
-          data={variantImage}
-          aspectRatio="1/1"
-          sizes="(min-width: 45em) 20vw, 50vw"
-        />
+        <Link key={id} className="recommended-product block" to={`/products/${handle}`}>
+          {variantImage && (
+            <HoverableImage
+              imageUrl={variantImage.url}
+              hoverImageUrl={hoverImageUrl}
+              altText={variantImage.altText || title}
+              width={variantImage.width || 72}
+              height={variantImage.height || 72}
+            />
+          )}
         </Link>
       </div>
       <div className="mt-2">
@@ -62,12 +71,11 @@ export function ProductCard({
           onSelectColor={handleColorSelect}
         />
       </div>
-        <h6>{vendor}</h6>
-        <h4>{title}</h4>
-        <small>
-          <Money data={priceRange.minVariantPrice} />
-        </small>
-      
+      <h6>{vendor}</h6>
+      <h4>{title}</h4>
+      <small>
+        <Money data={priceRange.minVariantPrice} />
+      </small>
     </div>
   );
 }

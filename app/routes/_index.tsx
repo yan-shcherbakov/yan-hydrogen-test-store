@@ -143,6 +143,15 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
           width
           height
         }
+        hoverImage: metafield(namespace: "custom", key: "hover_image") {
+          reference {
+            ... on MediaImage {
+              image {
+                url
+              }
+            }
+          }
+        }
       }
     }
   }
