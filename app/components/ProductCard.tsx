@@ -29,10 +29,8 @@ export function ProductCard({
 }: ProductCardProps) {
   const [selectedVariant, setSelectedVariant] = useState(variants[0]);
   
-  // Extract colors from variant titles
   const colorVariants = variants.map((variant) => variant.title);
   
-  // Handle color selection
   const handleColorSelect = (color: string) => {
     const newVariant = variants.find(
       (variant) => variant.title.toLowerCase() === color.toLowerCase()
@@ -43,10 +41,8 @@ export function ProductCard({
     }
   };
 
-  // Find selected variant image or use the first image as fallback
   const variantImage = selectedVariant?.image || images[0];
   
-  // Get hover image from metafield
   const hoverImageValue = selectedVariant?.hoverImage?.reference?.image?.url;
   const hoverImageUrl = hoverImageValue ?? null;
   
@@ -75,10 +71,10 @@ export function ProductCard({
           onSelectColor={handleColorSelect}
         />
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-2">
         <p>{vendor}</p>
-        <p className="text-[var(--color-primary-blue)]">{title}</p>
-        <div className="flex gap-1">
+        <h4 className="text-[var(--color-primary-blue)]">{title}</h4>
+        <div className="flex gap-3">
           {isOnSale && <Money className="line-through" data={originalPrice.minVariantPrice} />}
           <Money className={`${isOnSale ? 'text-[var(--color-sale)]' : ''}`} data={price.minVariantPrice} />
         </div>

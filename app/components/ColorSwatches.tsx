@@ -43,8 +43,8 @@ export function ColorSwatches({colors, selectedColor, onSelectColor}: ColorSwatc
           <button
             key={color}
             onClick={() => onSelectColor?.(color)}
-            className={`w-6 h-6 rounded-full flex items-center justify-center cursor-pointer ${
-              isSelected ? 'ring-2 ring-black p-0.5' : ''
+            className={`w-7 h-7 rounded-full flex items-center justify-center cursor-pointer ${
+              isSelected ? 'ring-1 ring-[var(--color-primary-blue)] p-0.5' : ''
             }`}
             title={color}
             aria-label={`${color} color${isSelected ? ' (selected)' : ''}`}

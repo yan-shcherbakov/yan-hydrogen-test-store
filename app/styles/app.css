@@ -6,7 +6,7 @@
   --header-height: 64px;
   --color-dark: #111111;
   --color-light: #fff;
-  --color-title-blue: #0A4874;
+  --color-primary-blue: #0A4874;
   --color-sale: #FF0000;
 }
 
@@ -20,10 +20,11 @@ body {
   font-size: 14px;
 }
 
-h2 {
+h4 {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 18px;
+  color: var(--color-primary-blue);
 }
 
 /*
