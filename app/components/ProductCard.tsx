@@ -4,6 +4,7 @@ import type {RecommendedProductsQuery} from 'storefrontapi.generated';
 import {ColorSwatches} from './ColorSwatches';
 import {useState} from 'react';
 import {HoverableImage} from './HoverableImage';
+import {Badge} from './Badge';
 
 type ProductCardProps = {
   id: string;
@@ -24,7 +25,7 @@ export function ProductCard({
   images,
   priceRange,
   variants,
-  isOnSale = false,
+  isOnSale = true,
 }: ProductCardProps) {
   const [selectedVariant, setSelectedVariant] = useState(variants[0]);
   
@@ -51,7 +52,8 @@ export function ProductCard({
   
   return (
     <div className="flex flex-col gap-3">
-      <div className="border border-[#E8E8E8] rounded-[10px] overflow-hidden aspect-square">
+      <div className="border border-[#E8E8E8] rounded-[10px] overflow-hidden aspect-square relative p-[20px]">
+        {isOnSale && <Badge className="absolute top-5 left-5 z-10" />}
         <Link key={id} className="recommended-product block h-full" to={`/products/${handle}`}>
           {variantImage && (
             <HoverableImage

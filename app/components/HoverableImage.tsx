@@ -70,7 +70,7 @@ export function HoverableImage({
             alt={`${altText} - hover`}
             width={width}
             height={height}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain object-top"
           />
         </div>
       )}
