@@ -6,12 +6,12 @@ type ProductCardProps = {
   id: string;
   handle: string;
   title: string;
-  isOnSale: boolean;
   images: RecommendedProductsQuery['products']['nodes'][number]['images']['nodes'];
   priceRange: RecommendedProductsQuery['products']['nodes'][number]['priceRange'];
+  isOnSale?: boolean;
 }
 
-export function ProductCard({ id, handle, title, images, priceRange }: ProductCardProps) {
+export function ProductCard({ id, handle, title, images, priceRange, isOnSale = false }: ProductCardProps) {
     return (
       <Link
         key={id}

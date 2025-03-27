@@ -1,7 +1,7 @@
 import {Await} from '@remix-run/react';
 import {Suspense} from 'react';
 import type {RecommendedProductsQuery} from 'storefrontapi.generated';
-import { ProductCard } from './ProductCard';
+import {ProductCard} from './ProductCard';
 
 export function RecommendedProducts({
   products,
@@ -16,7 +16,16 @@ export function RecommendedProducts({
           {(response) => (
             <div className="recommended-products-grid">
               {response
-                ? response.products.nodes.map((product) => <ProductCard key={product.id} id={product.id} handle={product.handle} title={product.title} images={product.images.nodes} priceRange={product.priceRange} />)
+                ? response.products.nodes.map((product) => (
+                    <ProductCard
+                      key={product.id}
+                      id={product.id}
+                      handle={product.handle}
+                      title={product.title}
+                      images={product.images.nodes}
+                      priceRange={product.priceRange}
+                    />
+                  ))
                 : null}
             </div>
           )}
