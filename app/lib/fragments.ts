@@ -231,3 +231,55 @@ export const FOOTER_QUERY = `#graphql
   }
   ${MENU_FRAGMENT}
 ` as const;
+
+export const PRODUCT_ITEM_FRAGMENT = `#graphql
+fragment ProductItem on Product {
+    id
+    title
+    handle
+    vendor
+    compareAtPriceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    priceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    images(first: 1) {
+      nodes {
+        id
+        url
+        altText
+        width
+        height
+      }
+    }
+    variants(first: 25) {
+      nodes {
+        id
+        title
+        image {
+          id
+          url
+          altText
+          width
+          height
+        }
+        hoverImage: metafield(namespace: "custom", key: "hover_image") {
+          reference {
+            ... on MediaImage {
+              image {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+` as const;

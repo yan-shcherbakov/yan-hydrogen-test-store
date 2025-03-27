@@ -1,6 +1,6 @@
-import {Link, useRouteLoaderData} from '@remix-run/react';
+import {Link} from '@remix-run/react';
 import {Money} from '@shopify/hydrogen';
-import type {RecommendedProductsQuery} from 'storefrontapi.generated';
+import type {ProductItemFragment} from 'storefrontapi.generated';
 import {ColorSwatches} from './ColorSwatches';
 import {useState} from 'react';
 import {HoverableImage} from './HoverableImage';
@@ -11,10 +11,10 @@ type ProductCardProps = {
   vendor: string;
   handle: string;
   title: string;
-  variants: RecommendedProductsQuery['products']['nodes'][number]['variants']['nodes'];
-  images: RecommendedProductsQuery['products']['nodes'][number]['images']['nodes'];
-  price: RecommendedProductsQuery['products']['nodes'][number]['priceRange'];
-  originalPrice: RecommendedProductsQuery['products']['nodes'][number]['compareAtPriceRange'];
+  variants: ProductItemFragment['variants']['nodes'];
+  images: ProductItemFragment['images']['nodes'];
+  price: ProductItemFragment['priceRange'];
+  originalPrice: ProductItemFragment['compareAtPriceRange'];
 };
 
 export function ProductCard({
@@ -77,7 +77,7 @@ export function ProductCard({
       </div>
       <div className="flex flex-col gap-1">
         <p>{vendor}</p>
-        <h2 className="text-[var(--color-title-blue)]">{title}</h2>
+        <p className="text-[var(--color-primary-blue)]">{title}</p>
         <div className="flex gap-1">
           {isOnSale && <Money className="line-through" data={originalPrice.minVariantPrice} />}
           <Money className={`${isOnSale ? 'text-[var(--color-sale)]' : ''}`} data={price.minVariantPrice} />

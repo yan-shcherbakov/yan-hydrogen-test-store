@@ -367,7 +367,7 @@ button.reset:hover:not(:has(> *)) {
   object-fit: cover;
 }
 
-.recommended-products-grid {
+.products-grid {
   display: grid;
   grid-gap: 1.5rem;
   grid-template-columns: repeat(2, 1fr);
@@ -407,13 +407,6 @@ button.reset:hover:not(:has(> *)) {
   @media (min-width: 45em) {
     max-width: 600px;
   }
-}
-
-.products-grid {
-  display: grid;
-  grid-gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(var(--grid-item-width), 1fr));
-  margin-bottom: 2rem;
 }
 
 .product-item img {

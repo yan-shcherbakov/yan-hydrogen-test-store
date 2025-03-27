@@ -7,6 +7,7 @@ import type {
   RecommendedProductsQuery,
 } from 'storefrontapi.generated';
 import {RecommendedProducts} from '~/components/RecommendedProducts';
+import {PRODUCT_ITEM_FRAGMENT} from '~/lib/fragments';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -112,60 +113,12 @@ const FEATURED_COLLECTION_QUERY = `#graphql
 ` as const;
 
 const RECOMMENDED_PRODUCTS_QUERY = `#graphql
-  fragment RecommendedProduct on Product {
-    id
-    title
-    handle
-    vendor
-    compareAtPriceRange {
-      minVariantPrice {
-        amount
-        currencyCode
-      }
-    }
-    priceRange {
-      minVariantPrice {
-        amount
-        currencyCode
-      }
-    }
-    images(first: 1) {
-      nodes {
-        id
-        url
-        altText
-        width
-        height
-      }
-    }
-    variants(first: 25) {
-      nodes {
-        id
-        title
-        image {
-          id
-          url
-          altText
-          width
-          height
-        }
-        hoverImage: metafield(namespace: "custom", key: "hover_image") {
-          reference {
-            ... on MediaImage {
-              image {
-                url
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+  ${PRODUCT_ITEM_FRAGMENT}
   query RecommendedProducts ($country: CountryCode, $language: LanguageCode)
     @inContext(country: $country, language: $language) {
     products(first: 4, sortKey: UPDATED_AT, reverse: true) {
       nodes {
-        ...RecommendedProduct
+        ...ProductItem
       }
     }
   }
