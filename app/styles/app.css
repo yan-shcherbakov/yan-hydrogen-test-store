@@ -4,12 +4,24 @@
   --cart-aside-summary-height: 250px;
   --grid-item-width: 355px;
   --header-height: 64px;
-  --color-dark: #000;
+  --color-dark: #111111;
   --color-light: #fff;
 }
 
 img {
   border-radius: 4px;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: var(--color-dark);
+  font-size: 14px;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18px;
 }
 
 /*

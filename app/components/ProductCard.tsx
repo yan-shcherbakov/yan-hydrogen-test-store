@@ -26,7 +26,6 @@ export function ProductCard({
   variants,
   isOnSale = false,
 }: ProductCardProps) {
-  const rootData = useRouteLoaderData('root');
   const [selectedVariant, setSelectedVariant] = useState(variants[0]);
   
   // Extract colors from variant titles
@@ -51,7 +50,7 @@ export function ProductCard({
   const hoverImageUrl = hoverImageValue ?? null;
   
   return (
-    <div>
+    <div className="flex flex-col gap-3">
       <div className="border border-[#E8E8E8] rounded-[10px] overflow-hidden aspect-square">
         <Link key={id} className="recommended-product block h-full" to={`/products/${handle}`}>
           {variantImage && (
@@ -72,11 +71,11 @@ export function ProductCard({
           onSelectColor={handleColorSelect}
         />
       </div>
-      <h6>{vendor}</h6>
-      <h4>{title}</h4>
-      <small>
+      <div className="flex flex-col gap-1">
+        <p>{vendor}</p>
+        <h2 className="text-[var(--color-title-blue)]">{title}</h2>
         <Money data={priceRange.minVariantPrice} />
-      </small>
+      </div>
     </div>
   );
 }

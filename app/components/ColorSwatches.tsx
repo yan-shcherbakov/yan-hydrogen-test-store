@@ -18,7 +18,7 @@ const DEFAULT_COLOR_MAP: Record<string, string> = {
 };
 
 // TODO: This order should be defined in a metafield in the future for better customization
-const COLOR_ORDER = ['orange', 'green', 'blue', 'yellow', 'pink', 'navy'];
+// const COLOR_ORDER = ['orange', 'green', 'blue', 'yellow', 'pink', 'navy'];
 
 export function ColorSwatches({colors, selectedColor, onSelectColor}: ColorSwatchesProps) {
   const rootData = useRouteLoaderData<RootLoader>('root');
@@ -36,21 +36,21 @@ export function ColorSwatches({colors, selectedColor, onSelectColor}: ColorSwatc
   }, {} as Record<string, string>) ?? DEFAULT_COLOR_MAP);
 
   // Sort colors according to the predefined order
-  const sortedColors = [...colors].sort((a, b) => {
-    const aIndex = COLOR_ORDER.indexOf(a.toLowerCase());
-    const bIndex = COLOR_ORDER.indexOf(b.toLowerCase());
+  // const sortedColors = [...colors].sort((a, b) => {
+  //   const aIndex = COLOR_ORDER.indexOf(a.toLowerCase());
+  //   const bIndex = COLOR_ORDER.indexOf(b.toLowerCase());
     
-    // Colors not in the predefined order go to the end
-    if (aIndex === -1 && bIndex === -1) return 0;
-    if (aIndex === -1) return 1;
-    if (bIndex === -1) return -1;
+  //   // Colors not in the predefined order go to the end
+  //   if (aIndex === -1 && bIndex === -1) return 0;
+  //   if (aIndex === -1) return 1;
+  //   if (bIndex === -1) return -1;
     
-    return aIndex - bIndex;
-  });
+  //   return aIndex - bIndex;
+  // });
 
   return (
     <div className="flex gap-2">
-      {sortedColors.map((color) => {
+      {colors.map((color) => {
         const normalizedColor = color.toLowerCase();
         const isSelected = selectedColor && normalizedColor === selectedColor.toLowerCase();
         const colorHex = COLOR_MAP[normalizedColor] || '#cccccc'; // Default to gray if color not found
