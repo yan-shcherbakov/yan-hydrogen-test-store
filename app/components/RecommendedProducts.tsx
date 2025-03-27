@@ -14,7 +14,7 @@ export function RecommendedProducts({
       <Suspense fallback={<div>Loading...</div>}>
         <Await resolve={products}>
           {(response) => (
-            <div className="recommended-products-grid">
+            <div className="products-grid">
               {response
                 ? response.products.nodes.map((product) => (
                     <ProductCard
