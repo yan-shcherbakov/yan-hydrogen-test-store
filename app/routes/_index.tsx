@@ -135,6 +135,13 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
       nodes {
         id
         title
+        image {
+          id
+          url
+          altText
+          width
+          height
+        }
       }
     }
   }
