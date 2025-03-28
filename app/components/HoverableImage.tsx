@@ -32,7 +32,7 @@ export function HoverableImage({
   // Handle intentional hover with delay
   useEffect(() => {
     let hoverTimer: NodeJS.Timeout | null = null;
-    
+
     if (isHovering) {
       // A small delay before considering it an intentional hover
       hoverTimer = setTimeout(() => {
@@ -41,7 +41,7 @@ export function HoverableImage({
     } else {
       setIsIntentionalHover(false);
     }
-    
+
     return () => {
       if (hoverTimer) clearTimeout(hoverTimer);
     };
@@ -96,14 +96,17 @@ export function HoverableImage({
   return (
     <div
       className="relative w-full"
-      style={{ paddingBottom: `${aspectRatio}%` }}
+      style={{paddingBottom: `${aspectRatio}%`}}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       {/* Main image */}
       <div
         className={`absolute inset-0 transition-opacity duration-400 ${
-          isIntentionalHover && hoverImageUrl && hoverImageLoaded && !hoverImageError
+          isIntentionalHover &&
+          hoverImageUrl &&
+          hoverImageLoaded &&
+          !hoverImageError
             ? 'opacity-0'
             : 'opacity-100'
         }`}

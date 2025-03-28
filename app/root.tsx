@@ -32,7 +32,7 @@ query ColorPalette {
       }
     }
   }
-}`
+}`;
 
 export type RootLoader = typeof loader;
 

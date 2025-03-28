@@ -1,4 +1,4 @@
-import { useRouteLoaderData } from "@remix-run/react";
+import {useRouteLoaderData} from '@remix-run/react';
 import type {RootLoader} from '~/root';
 import {getColorMap} from '~/lib/util';
 
@@ -8,8 +8,11 @@ type ColorSwatchesProps = {
   onSelectColor?: (color: string) => void;
 };
 
-
-export function ColorSwatches({colors, selectedColor, onSelectColor}: ColorSwatchesProps) {
+export function ColorSwatches({
+  colors,
+  selectedColor,
+  onSelectColor,
+}: ColorSwatchesProps) {
   const rootData = useRouteLoaderData<RootLoader>('root');
   const colorPalette = rootData?.colorPalette;
 
@@ -19,9 +22,10 @@ export function ColorSwatches({colors, selectedColor, onSelectColor}: ColorSwatc
     <div className="flex gap-2">
       {colors.map((color) => {
         const normalizedColor = color.toLowerCase();
-        const isSelected = selectedColor && normalizedColor === selectedColor.toLowerCase();
+        const isSelected =
+          selectedColor && normalizedColor === selectedColor.toLowerCase();
         const colorHex = colorMap[normalizedColor] || '#cccccc'; // Default to gray if color not found
-        
+
         return (
           <button
             key={color}
@@ -32,7 +36,7 @@ export function ColorSwatches({colors, selectedColor, onSelectColor}: ColorSwatc
             title={color}
             aria-label={`${color} color${isSelected ? ' (selected)' : ''}`}
           >
-            <span 
+            <span
               className={`w-full h-full rounded-full block ${
                 isSelected ? 'ring-1 ring-white' : ''
               }`}
