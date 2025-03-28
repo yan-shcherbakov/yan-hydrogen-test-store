@@ -35,6 +35,7 @@ jobs:
         env:
           CI: true
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
 
       - name: Upload test results
         if: always()
