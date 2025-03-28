@@ -132,6 +132,11 @@ test.describe('ProductCard component', () => {
 
     const newImageSrc = await productImage.getAttribute('src');
 
+    await page.waitForFunction(selector => {
+      const img = document.querySelector(selector) as HTMLImageElement;
+      return img && img.complete && img.naturalHeight !== 0;
+    }, '.product-card img');
+
     expect(productImage).toBeVisible();
   });
 
