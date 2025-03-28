@@ -1,5 +1,6 @@
 import {Image} from '@shopify/hydrogen';
 import {useState, useEffect, useCallback, useMemo} from 'react';
+import {DEFAULT_HOVER_DELAY} from '../lib/constants';
 
 type HoverableImageProps = {
   imageUrl: string;
@@ -7,6 +8,7 @@ type HoverableImageProps = {
   altText: string;
   width: number;
   height: number;
+  hoverDelay?: number;
 };
 
 export function HoverableImage({
@@ -15,6 +17,7 @@ export function HoverableImage({
   altText,
   width,
   height,
+  hoverDelay = DEFAULT_HOVER_DELAY,
 }: HoverableImageProps) {
   const [isHovering, setIsHovering] = useState(false);
   const [isIntentionalHover, setIsIntentionalHover] = useState(false);
@@ -29,10 +32,10 @@ export function HoverableImage({
     let hoverTimer: NodeJS.Timeout | null = null;
     
     if (isHovering) {
-      // Add a small delay before considering it an intentional hover
+      // A small delay before considering it an intentional hover
       hoverTimer = setTimeout(() => {
         setIsIntentionalHover(true);
-      }, 100); // A delay before triggering the hover state
+      }, hoverDelay); // A delay before triggering the hover state
     } else {
       setIsIntentionalHover(false);
     }
@@ -40,7 +43,7 @@ export function HoverableImage({
     return () => {
       if (hoverTimer) clearTimeout(hoverTimer);
     };
-  }, [isHovering]);
+  }, [isHovering, hoverDelay]);
 
   // Memoize the image preloading logic
   const preloadImage = useCallback((url: string) => {
