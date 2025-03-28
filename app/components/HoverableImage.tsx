@@ -17,11 +17,30 @@ export function HoverableImage({
   height,
 }: HoverableImageProps) {
   const [isHovering, setIsHovering] = useState(false);
+  const [isIntentionalHover, setIsIntentionalHover] = useState(false);
   const [hoverImageLoaded, setHoverImageLoaded] = useState(false);
   const [hoverImageError, setHoverImageError] = useState(false);
 
   // Calculate aspect ratio
   const aspectRatio = useMemo(() => (height / width) * 100, [height, width]);
+
+  // Handle intentional hover with delay
+  useEffect(() => {
+    let hoverTimer: NodeJS.Timeout | null = null;
+    
+    if (isHovering) {
+      // Add a small delay before considering it an intentional hover
+      hoverTimer = setTimeout(() => {
+        setIsIntentionalHover(true);
+      }, 100); // A delay before triggering the hover state
+    } else {
+      setIsIntentionalHover(false);
+    }
+    
+    return () => {
+      if (hoverTimer) clearTimeout(hoverTimer);
+    };
+  }, [isHovering]);
 
   // Memoize the image preloading logic
   const preloadImage = useCallback((url: string) => {
@@ -78,8 +97,8 @@ export function HoverableImage({
     >
       {/* Main image */}
       <div
-        className={`absolute inset-0 transition-opacity duration-300 ${
-          isHovering && hoverImageUrl && hoverImageLoaded && !hoverImageError
+        className={`absolute inset-0 transition-opacity duration-400 ${
+          isIntentionalHover && hoverImageUrl && hoverImageLoaded && !hoverImageError
             ? 'opacity-0'
             : 'opacity-100'
         }`}
@@ -97,7 +116,7 @@ export function HoverableImage({
       {hoverImageUrl && !hoverImageError && (
         <div
           className={`absolute inset-0 transition-opacity duration-300 ${
-            isHovering && hoverImageLoaded ? 'opacity-100' : 'opacity-0'
+            isIntentionalHover && hoverImageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           style={hoverImageLoaded ? {} : {display: 'none'}}
         >
