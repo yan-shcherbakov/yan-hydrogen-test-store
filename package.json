@@ -10,7 +10,9 @@
     "preview": "shopify hydrogen preview --build",
     "lint": "eslint --no-error-on-unmatched-pattern .",
     "typecheck": "tsc --noEmit",
-    "codegen": "shopify hydrogen codegen"
+    "codegen": "shopify hydrogen codegen",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "prettier": "@shopify/prettier-config",
   "dependencies": {
@@ -29,6 +31,7 @@
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.18.0",
     "@graphql-codegen/cli": "5.0.2",
+    "@playwright/test": "^1.51.1",
     "@remix-run/dev": "^2.15.3",
     "@shopify/cli": "~3.75.3",
     "@shopify/hydrogen-codegen": "^0.3.2",
