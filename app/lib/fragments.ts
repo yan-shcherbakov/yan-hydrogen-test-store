@@ -263,6 +263,10 @@ fragment ProductItem on Product {
       nodes {
         id
         title
+        selectedOptions {
+          name
+          value
+        }
         image {
           id
           url

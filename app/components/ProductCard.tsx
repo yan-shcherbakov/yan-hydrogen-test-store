@@ -2,9 +2,10 @@ import {Link} from '@remix-run/react';
 import {Money} from '@shopify/hydrogen';
 import type {ProductItemFragment} from 'storefrontapi.generated';
 import {ColorSwatches} from './ColorSwatches';
-import {useState} from 'react';
+import {useState, useMemo, useCallback} from 'react';
 import {HoverableImage} from './HoverableImage';
 import {Badge} from './Badge';
+import {getColorVariants} from '~/lib/util';
 
 type ProductCardProps = {
   id: string;
@@ -29,9 +30,9 @@ export function ProductCard({
 }: ProductCardProps) {
   const [selectedVariant, setSelectedVariant] = useState(variants[0]);
   
-  const colorVariants = variants.map((variant) => variant.title);
+  const colorVariants = useMemo(() => getColorVariants(variants), [variants]);
   
-  const handleColorSelect = (color: string) => {
+  const handleColorSelect = useCallback((color: string) => {
     const newVariant = variants.find(
       (variant) => variant.title.toLowerCase() === color.toLowerCase()
     );
@@ -39,7 +40,7 @@ export function ProductCard({
     if (newVariant) {
       setSelectedVariant(newVariant);
     }
-  };
+  }, [variants]);
 
   const variantImage = selectedVariant?.image || images[0];
   
