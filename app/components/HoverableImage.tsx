@@ -1,5 +1,5 @@
 import {Image} from '@shopify/hydrogen';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback, useMemo} from 'react';
 
 type HoverableImageProps = {
   imageUrl: string;
@@ -18,32 +18,68 @@ export function HoverableImage({
 }: HoverableImageProps) {
   const [isHovering, setIsHovering] = useState(false);
   const [hoverImageLoaded, setHoverImageLoaded] = useState(false);
+  const [hoverImageError, setHoverImageError] = useState(false);
 
   // Calculate aspect ratio
-  const aspectRatio = (height / width) * 100;
+  const aspectRatio = useMemo(() => (height / width) * 100, [height, width]);
+
+  // Memoize the image preloading logic
+  const preloadImage = useCallback((url: string) => {
+    return new Promise((resolve, reject) => {
+      const img = new window.Image();
+      img.src = url;
+      img.onload = () => resolve(true);
+      img.onerror = () => reject(new Error('Failed to load hover image'));
+    });
+  }, []);
 
   // Preload hover image only on client side
   useEffect(() => {
-    if (hoverImageUrl) {
-      const img = document.createElement('img');
-      img.src = hoverImageUrl;
-      img.onload = () => setHoverImageLoaded(true);
-    } else {
-      setHoverImageLoaded(false);
-    }
-  }, [hoverImageUrl]);
+    let isMounted = true;
+
+    const loadHoverImage = async () => {
+      if (!hoverImageUrl) {
+        setHoverImageLoaded(false);
+        setHoverImageError(false);
+        return;
+      }
+
+      try {
+        await preloadImage(hoverImageUrl);
+        if (isMounted) {
+          setHoverImageLoaded(true);
+          setHoverImageError(false);
+        }
+      } catch (error) {
+        if (isMounted) {
+          setHoverImageLoaded(false);
+          setHoverImageError(true);
+        }
+      }
+    };
+
+    loadHoverImage();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [hoverImageUrl, preloadImage]);
+
+  // Memoize the hover handlers
+  const handleMouseEnter = useCallback(() => setIsHovering(true), []);
+  const handleMouseLeave = useCallback(() => setIsHovering(false), []);
 
   return (
     <div
       className="relative w-full"
       style={{ paddingBottom: `${aspectRatio}%` }}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {/* Main image */}
       <div
         className={`absolute inset-0 transition-opacity duration-300 ${
-          isHovering && hoverImageUrl && hoverImageLoaded
+          isHovering && hoverImageUrl && hoverImageLoaded && !hoverImageError
             ? 'opacity-0'
             : 'opacity-100'
         }`}
@@ -58,7 +94,7 @@ export function HoverableImage({
       </div>
 
       {/* Hover image */}
-      {hoverImageUrl && (
+      {hoverImageUrl && !hoverImageError && (
         <div
           className={`absolute inset-0 transition-opacity duration-300 ${
             isHovering && hoverImageLoaded ? 'opacity-100' : 'opacity-0'
