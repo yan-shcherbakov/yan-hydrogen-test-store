@@ -56,7 +56,7 @@ export function ProductCard({
     Number(price?.minVariantPrice?.amount);
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 product-card">
       <div className="border border-[#E8E8E8] rounded-[10px] overflow-hidden aspect-square relative p-[20px]">
         {isOnSale && (
           <Badge className="absolute top-4 left-4 z-10">On Sale!</Badge>

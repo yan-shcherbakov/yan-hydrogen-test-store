@@ -8,3 +8,5 @@ node_modules
 .shopify
 .spec
 .aider*
+playwright-report
+test-results
