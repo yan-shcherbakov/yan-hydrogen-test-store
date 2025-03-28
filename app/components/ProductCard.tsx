@@ -43,8 +43,9 @@ export function ProductCard({
 
   const variantImage = selectedVariant?.image || images[0];
   
-  const hoverImageValue = selectedVariant?.hoverImage?.reference?.image?.url;
-  const hoverImageUrl = hoverImageValue ?? null;
+  const hoverImageValue = selectedVariant?.hoverImage?.reference?.image;
+  const hoverImageUrl = hoverImageValue?.url ?? null;
+  const hoverImageAltText = hoverImageValue?.altText ?? '';
   
   const isOnSale = Number(originalPrice?.minVariantPrice?.amount) > Number(price?.minVariantPrice?.amount);
 
@@ -57,7 +58,8 @@ export function ProductCard({
             <HoverableImage
               imageUrl={variantImage.url}
               hoverImageUrl={hoverImageUrl}
-              altText={variantImage.altText || title}
+              imageAltText={variantImage.altText || title}
+              hoverImageAltText={hoverImageAltText}
               width={variantImage.width || 72}
               height={variantImage.height || 72}
             />

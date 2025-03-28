@@ -5,7 +5,8 @@ import {DEFAULT_HOVER_DELAY} from '../lib/constants';
 type HoverableImageProps = {
   imageUrl: string;
   hoverImageUrl: string | null;
-  altText: string;
+  imageAltText: string;
+  hoverImageAltText: string;
   width: number;
   height: number;
   hoverDelay?: number;
@@ -14,7 +15,8 @@ type HoverableImageProps = {
 export function HoverableImage({
   imageUrl,
   hoverImageUrl,
-  altText,
+  imageAltText,
+  hoverImageAltText,
   width,
   height,
   hoverDelay = DEFAULT_HOVER_DELAY,
@@ -108,7 +110,7 @@ export function HoverableImage({
       >
         <Image
           src={imageUrl}
-          alt={altText}
+          alt={imageAltText}
           width={width}
           height={height}
           className="w-full h-full object-cover"
@@ -125,7 +127,7 @@ export function HoverableImage({
         >
           <Image
             src={hoverImageUrl}
-            alt={`${altText} - hover`}
+            alt={hoverImageAltText}
             width={width}
             height={height}
             className="w-full h-full object-contain object-top"

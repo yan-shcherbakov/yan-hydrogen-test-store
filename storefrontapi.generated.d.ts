@@ -314,7 +314,9 @@ export type ProductItemFragment = Pick<
         >;
         hoverImage?: StorefrontAPI.Maybe<{
           reference?: StorefrontAPI.Maybe<{
-            image?: StorefrontAPI.Maybe<Pick<StorefrontAPI.Image, 'url'>>;
+            image?: StorefrontAPI.Maybe<
+              Pick<StorefrontAPI.Image, 'url' | 'altText'>
+            >;
           }>;
         }>;
       }
@@ -417,7 +419,9 @@ export type RecommendedProductsQuery = {
               >;
               hoverImage?: StorefrontAPI.Maybe<{
                 reference?: StorefrontAPI.Maybe<{
-                  image?: StorefrontAPI.Maybe<Pick<StorefrontAPI.Image, 'url'>>;
+                  image?: StorefrontAPI.Maybe<
+                    Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                  >;
                 }>;
               }>;
             }
@@ -595,7 +599,7 @@ export type CollectionQuery = {
                   hoverImage?: StorefrontAPI.Maybe<{
                     reference?: StorefrontAPI.Maybe<{
                       image?: StorefrontAPI.Maybe<
-                        Pick<StorefrontAPI.Image, 'url'>
+                        Pick<StorefrontAPI.Image, 'url' | 'altText'>
                       >;
                     }>;
                   }>;
@@ -702,7 +706,9 @@ export type CatalogQuery = {
               >;
               hoverImage?: StorefrontAPI.Maybe<{
                 reference?: StorefrontAPI.Maybe<{
-                  image?: StorefrontAPI.Maybe<Pick<StorefrontAPI.Image, 'url'>>;
+                  image?: StorefrontAPI.Maybe<
+                    Pick<StorefrontAPI.Image, 'url' | 'altText'>
+                  >;
                 }>;
               }>;
             }
@@ -1273,7 +1279,7 @@ interface GeneratedQueryTypes {
     return: FeaturedCollectionQuery;
     variables: FeaturedCollectionQueryVariables;
   };
-  '#graphql\n  #graphql\nfragment ProductItem on Product {\n    id\n    title\n    handle\n    vendor\n    compareAtPriceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    images(first: 1) {\n      nodes {\n        id\n        url\n        altText\n        width\n        height\n      }\n    }\n    variants(first: 25) {\n      nodes {\n        id\n        title\n        image {\n          id\n          url\n          altText\n          width\n          height\n        }\n        hoverImage: metafield(namespace: "custom", key: "hover_image") {\n          reference {\n            ... on MediaImage {\n              image {\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n\n  query RecommendedProducts ($country: CountryCode, $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    products(first: 4, sortKey: UPDATED_AT, reverse: true) {\n      nodes {\n        ...ProductItem\n      }\n    }\n  }\n': {
+  '#graphql\n  #graphql\nfragment ProductItem on Product {\n    id\n    title\n    handle\n    vendor\n    compareAtPriceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    images(first: 1) {\n      nodes {\n        id\n        url\n        altText\n        width\n        height\n      }\n    }\n    variants(first: 25) {\n      nodes {\n        id\n        title\n        image {\n          id\n          url\n          altText\n          width\n          height\n        }\n        hoverImage: metafield(namespace: "custom", key: "hover_image") {\n          reference {\n            ... on MediaImage {\n              image {\n                url\n                altText\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n\n  query RecommendedProducts ($country: CountryCode, $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    products(first: 4, sortKey: UPDATED_AT, reverse: true) {\n      nodes {\n        ...ProductItem\n      }\n    }\n  }\n': {
     return: RecommendedProductsQuery;
     variables: RecommendedProductsQueryVariables;
   };
@@ -1289,7 +1295,7 @@ interface GeneratedQueryTypes {
     return: BlogsQuery;
     variables: BlogsQueryVariables;
   };
-  '#graphql\n  #graphql\nfragment ProductItem on Product {\n    id\n    title\n    handle\n    vendor\n    compareAtPriceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    images(first: 1) {\n      nodes {\n        id\n        url\n        altText\n        width\n        height\n      }\n    }\n    variants(first: 25) {\n      nodes {\n        id\n        title\n        image {\n          id\n          url\n          altText\n          width\n          height\n        }\n        hoverImage: metafield(namespace: "custom", key: "hover_image") {\n          reference {\n            ... on MediaImage {\n              image {\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n\n  query Collection(\n    $handle: String!\n    $country: CountryCode\n    $language: LanguageCode\n    $first: Int\n    $last: Int\n    $startCursor: String\n    $endCursor: String\n  ) @inContext(country: $country, language: $language) {\n    collection(handle: $handle) {\n      id\n      handle\n      title\n      description\n      products(\n        first: $first,\n        last: $last,\n        before: $startCursor,\n        after: $endCursor\n      ) {\n        nodes {\n          ...ProductItem\n        }\n        pageInfo {\n          hasPreviousPage\n          hasNextPage\n          endCursor\n          startCursor\n        }\n      }\n    }\n  }\n': {
+  '#graphql\n  #graphql\nfragment ProductItem on Product {\n    id\n    title\n    handle\n    vendor\n    compareAtPriceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    images(first: 1) {\n      nodes {\n        id\n        url\n        altText\n        width\n        height\n      }\n    }\n    variants(first: 25) {\n      nodes {\n        id\n        title\n        image {\n          id\n          url\n          altText\n          width\n          height\n        }\n        hoverImage: metafield(namespace: "custom", key: "hover_image") {\n          reference {\n            ... on MediaImage {\n              image {\n                url\n                altText\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n\n  query Collection(\n    $handle: String!\n    $country: CountryCode\n    $language: LanguageCode\n    $first: Int\n    $last: Int\n    $startCursor: String\n    $endCursor: String\n  ) @inContext(country: $country, language: $language) {\n    collection(handle: $handle) {\n      id\n      handle\n      title\n      description\n      products(\n        first: $first,\n        last: $last,\n        before: $startCursor,\n        after: $endCursor\n      ) {\n        nodes {\n          ...ProductItem\n        }\n        pageInfo {\n          hasPreviousPage\n          hasNextPage\n          endCursor\n          startCursor\n        }\n      }\n    }\n  }\n': {
     return: CollectionQuery;
     variables: CollectionQueryVariables;
   };
@@ -1297,7 +1303,7 @@ interface GeneratedQueryTypes {
     return: StoreCollectionsQuery;
     variables: StoreCollectionsQueryVariables;
   };
-  '#graphql\n  query Catalog(\n    $country: CountryCode\n    $language: LanguageCode\n    $first: Int\n    $last: Int\n    $startCursor: String\n    $endCursor: String\n  ) @inContext(country: $country, language: $language) {\n    products(first: $first, last: $last, before: $startCursor, after: $endCursor) {\n      nodes {\n        ...ProductItem\n      }\n      pageInfo {\n        hasPreviousPage\n        hasNextPage\n        startCursor\n        endCursor\n      }\n    }\n  }\n  #graphql\nfragment ProductItem on Product {\n    id\n    title\n    handle\n    vendor\n    compareAtPriceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    images(first: 1) {\n      nodes {\n        id\n        url\n        altText\n        width\n        height\n      }\n    }\n    variants(first: 25) {\n      nodes {\n        id\n        title\n        image {\n          id\n          url\n          altText\n          width\n          height\n        }\n        hoverImage: metafield(namespace: "custom", key: "hover_image") {\n          reference {\n            ... on MediaImage {\n              image {\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n\n': {
+  '#graphql\n  query Catalog(\n    $country: CountryCode\n    $language: LanguageCode\n    $first: Int\n    $last: Int\n    $startCursor: String\n    $endCursor: String\n  ) @inContext(country: $country, language: $language) {\n    products(first: $first, last: $last, before: $startCursor, after: $endCursor) {\n      nodes {\n        ...ProductItem\n      }\n      pageInfo {\n        hasPreviousPage\n        hasNextPage\n        startCursor\n        endCursor\n      }\n    }\n  }\n  #graphql\nfragment ProductItem on Product {\n    id\n    title\n    handle\n    vendor\n    compareAtPriceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    priceRange {\n      minVariantPrice {\n        amount\n        currencyCode\n      }\n    }\n    images(first: 1) {\n      nodes {\n        id\n        url\n        altText\n        width\n        height\n      }\n    }\n    variants(first: 25) {\n      nodes {\n        id\n        title\n        image {\n          id\n          url\n          altText\n          width\n          height\n        }\n        hoverImage: metafield(namespace: "custom", key: "hover_image") {\n          reference {\n            ... on MediaImage {\n              image {\n                url\n                altText\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n\n': {
     return: CatalogQuery;
     variables: CatalogQueryVariables;
   };

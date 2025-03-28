@@ -275,6 +275,7 @@ fragment ProductItem on Product {
             ... on MediaImage {
               image {
                 url
+                altText
               }
             }
           }
