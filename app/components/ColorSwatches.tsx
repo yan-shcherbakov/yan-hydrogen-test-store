@@ -1,20 +1,11 @@
 import { useRouteLoaderData } from "@remix-run/react";
 import type {RootLoader} from '~/root';
+import { DEFAULT_COLOR_MAP } from "~/lib/constants";
 
 type ColorSwatchesProps = {
   colors: string[];
   selectedColor?: string;
   onSelectColor?: (color: string) => void;
-};
-
-// TODO: Move to constants file
-const DEFAULT_COLOR_MAP: Record<string, string> = {
-  orange: '#FF6633',
-  green: '#006600',
-  blue: '#00639C',
-  yellow: '#FCE78D',
-  pink: '#FFCCFF',
-  navy: '#19264B',
 };
 
 export function ColorSwatches({colors, selectedColor, onSelectColor}: ColorSwatchesProps) {
