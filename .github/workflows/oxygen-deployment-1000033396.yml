@@ -45,7 +45,7 @@ jobs:
 
       - name: Run end-to-end tests
         id: end-to-end-tests
-        uses: ./.github/actions/end-to-end-tests
+        uses: ./.github/actions/e2e-tests
         with:
           url: ${{ env.DEPLOYMENT_URL }}
           auth-bypass-token: ${{ env.AUTH_BYPASS_TOKEN }}
