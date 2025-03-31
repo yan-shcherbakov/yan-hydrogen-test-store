@@ -1,5 +1,6 @@
 import {
   DEFAULT_COLOR_MAP,
+  DEFAULT_COLOR,
   COLOR_OPTION_NAME,
   COLOUR_OPTION_NAME,
 } from './constants';
@@ -50,4 +51,8 @@ export function getColorVariants(
       return colorOption?.value || '';
     })
     .filter(Boolean);
+}
+
+export function getColorHex(color: string) {
+  return DEFAULT_COLOR_MAP[color] || DEFAULT_COLOR;
 }
