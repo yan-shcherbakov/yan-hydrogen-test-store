@@ -7,7 +7,10 @@ export const DEFAULT_COLOR_MAP: Record<string, string> = {
   navy: '#19264B',
 };
 
+export const DEFAULT_COLOR = '#CCCCCC';
+
 export const DEFAULT_HOVER_DELAY = 100;
 
 export const COLOR_OPTION_NAME = 'color';
 export const COLOUR_OPTION_NAME = 'colour';
+

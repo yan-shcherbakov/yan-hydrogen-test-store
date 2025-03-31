@@ -1,6 +1,7 @@
 import {useRouteLoaderData} from '@remix-run/react';
 import type {RootLoader} from '~/root';
 import {getColorMap} from '~/lib/util';
+import {DEFAULT_COLOR} from '~/lib/constants';
 
 type ColorSwatchesProps = {
   colors: string[];
@@ -24,7 +25,7 @@ export function ColorSwatches({
         const normalizedColor = color.toLowerCase();
         const isSelected =
           selectedColor && normalizedColor === selectedColor.toLowerCase();
-        const colorHex = colorMap[normalizedColor] || '#cccccc'; // Default to gray if color not found
+        const colorHex = colorMap[normalizedColor] || DEFAULT_COLOR;
 
         return (
           <button

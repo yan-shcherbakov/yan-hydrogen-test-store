@@ -288,6 +288,25 @@ export type FooterQuery = {
   >;
 };
 
+export type ColorPaletteQueryVariables = StorefrontAPI.Exact<{
+  [key: string]: never;
+}>;
+
+export type ColorPaletteQuery = {
+  metaobjects: {
+    edges: Array<{
+      node: {
+        label?: StorefrontAPI.Maybe<
+          Pick<StorefrontAPI.MetaobjectField, 'value'>
+        >;
+        color?: StorefrontAPI.Maybe<
+          Pick<StorefrontAPI.MetaobjectField, 'value'>
+        >;
+      };
+    }>;
+  };
+};
+
 export type ProductItemFragment = Pick<
   StorefrontAPI.Product,
   'id' | 'title' | 'handle' | 'vendor'
@@ -324,25 +343,6 @@ export type ProductItemFragment = Pick<
         }>;
       }
     >;
-  };
-};
-
-export type ColorPaletteQueryVariables = StorefrontAPI.Exact<{
-  [key: string]: never;
-}>;
-
-export type ColorPaletteQuery = {
-  metaobjects: {
-    edges: Array<{
-      node: {
-        label?: StorefrontAPI.Maybe<
-          Pick<StorefrontAPI.MetaobjectField, 'value'>
-        >;
-        color?: StorefrontAPI.Maybe<
-          Pick<StorefrontAPI.MetaobjectField, 'value'>
-        >;
-      };
-    }>;
   };
 };
 
@@ -1279,7 +1279,7 @@ interface GeneratedQueryTypes {
     return: FooterQuery;
     variables: FooterQueryVariables;
   };
-  '#graphql\nquery ColorPalette {\n  metaobjects(type: "shopify--color-pattern", first: 100) {\n    edges {\n      node {\n        label: field(key: "label") {\n          value\n        }\n        color: field(key: "color") {\n          value\n        }\n      }\n    }\n  }\n}': {
+  '#graphql\nquery ColorPalette {\n  metaobjects(type: "#REQUIRED_VAR=COLOR_METAOBJECT_TYPE", first: 100) {\n    edges {\n      node {\n        label: field(key: "label") {\n          value\n        }\n        color: field(key: "color") {\n          value\n        }\n      }\n    }\n  }\n}\n': {
     return: ColorPaletteQuery;
     variables: ColorPaletteQueryVariables;
   };

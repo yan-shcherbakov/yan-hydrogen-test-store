@@ -232,6 +232,23 @@ export const FOOTER_QUERY = `#graphql
   ${MENU_FRAGMENT}
 ` as const;
 
+export const COLOR_QUERY = `#graphql
+query ColorPalette {
+  metaobjects(type: "shopify--color-pattern", first: 100) {
+    edges {
+      node {
+        label: field(key: "label") {
+          value
+        }
+        color: field(key: "color") {
+          value
+        }
+      }
+    }
+  }
+}
+` as const;
+
 export const PRODUCT_ITEM_FRAGMENT = `#graphql
 fragment ProductItem on Product {
     id
