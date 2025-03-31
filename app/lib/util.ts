@@ -53,6 +53,21 @@ export function getColorVariants(
     .filter(Boolean);
 }
 
-export function getColorHex(color: string) {
-  return DEFAULT_COLOR_MAP[color] || DEFAULT_COLOR;
+export function getColorHex(colorVal: string, colorMap: Record<string, string>) {
+  const color = getNormalizedColor(colorVal);
+
+  return colorMap[color] || DEFAULT_COLOR;
+}
+
+export function isColorSelected(colorVal: string, selectedColorVal: string | undefined) {
+  if (!selectedColorVal) return false;
+
+  const color = getNormalizedColor(colorVal);
+  const selectedColor = getNormalizedColor(selectedColorVal);
+
+  return color.toLowerCase() === selectedColor.toLowerCase();
+}
+
+export function getNormalizedColor(colorVal: string) {
+  return colorVal.toLowerCase();
 }

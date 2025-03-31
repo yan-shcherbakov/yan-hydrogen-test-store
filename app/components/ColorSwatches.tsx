@@ -1,7 +1,6 @@
 import {useRouteLoaderData} from '@remix-run/react';
 import type {RootLoader} from '~/root';
-import {getColorMap, getColorHex} from '~/lib/util';
-import {DEFAULT_COLOR} from '~/lib/constants';
+import {getColorMap, getColorHex, isColorSelected} from '~/lib/util';
 
 type ColorSwatchesProps = {
   colors: string[];
@@ -16,16 +15,13 @@ export function ColorSwatches({
 }: ColorSwatchesProps) {
   const rootData = useRouteLoaderData<RootLoader>('root');
   const colorPalette = rootData?.colorPalette?.metaobjects?.edges ?? [];
-
   const colorMap = getColorMap(colorPalette);
 
   return (
     <div className="flex gap-2">
       {colors.map((color) => {
-        const normalizedColor = color.toLowerCase();
-        const isSelected =
-          selectedColor && normalizedColor === selectedColor.toLowerCase();
-        const colorHex = getColorHex(normalizedColor);
+        const isSelected =isColorSelected(color, selectedColor);
+        const colorHex = getColorHex(color, colorMap);
 
         return (
           <button
