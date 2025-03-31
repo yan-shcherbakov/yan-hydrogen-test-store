@@ -1279,7 +1279,7 @@ interface GeneratedQueryTypes {
     return: FooterQuery;
     variables: FooterQueryVariables;
   };
-  '#graphql\nquery ColorPalette {\n  metaobjects(type: "#REQUIRED_VAR=COLOR_METAOBJECT_TYPE", first: 100) {\n    edges {\n      node {\n        label: field(key: "label") {\n          value\n        }\n        color: field(key: "color") {\n          value\n        }\n      }\n    }\n  }\n}\n': {
+  '#graphql\nquery ColorPalette {\n  metaobjects(type: "shopify--color-pattern", first: 100) {\n    edges {\n      node {\n        label: field(key: "label") {\n          value\n        }\n        color: field(key: "color") {\n          value\n        }\n      }\n    }\n  }\n}\n': {
     return: ColorPaletteQuery;
     variables: ColorPaletteQueryVariables;
   };

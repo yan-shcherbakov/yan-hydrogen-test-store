@@ -16,23 +16,7 @@ import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 import tailwindCss from './styles/tailwind.css?url';
 import {PageLayout} from '~/components/PageLayout';
-import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
-
-const COLOR_QUERY = `#graphql
-query ColorPalette {
-  metaobjects(type: "shopify--color-pattern", first: 100) {
-    edges {
-      node {
-        label: field(key: "label") {
-          value
-        }
-        color: field(key: "color") {
-          value
-        }
-      }
-    }
-  }
-}`;
+import {FOOTER_QUERY, HEADER_QUERY, COLOR_QUERY} from '~/lib/fragments';
 
 export type RootLoader = typeof loader;
 
