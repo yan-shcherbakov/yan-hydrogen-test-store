@@ -4,8 +4,8 @@ import {getColorMap, getColorHex, isColorSelected} from '~/lib/util';
 
 type ColorSwatchesProps = {
   colors: string[];
+  onSelectColor: (color: string) => void;
   selectedColor?: string;
-  onSelectColor?: (color: string) => void;
 };
 
 export function ColorSwatches({
@@ -26,7 +26,7 @@ export function ColorSwatches({
         return (
           <button
             key={color}
-            onClick={() => onSelectColor?.(color)}
+            onClick={() => onSelectColor(color)}
             className={`w-7 h-7 rounded-full flex items-center justify-center cursor-pointer ${
               isSelected ? 'ring-1 ring-[var(--color-primary-blue)] p-0.5' : ''
             }`}
