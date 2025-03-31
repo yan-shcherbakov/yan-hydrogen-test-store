@@ -4,8 +4,8 @@ import {getColorMap, getColorHex, isColorSelected} from '~/lib/util';
 
 type ColorSwatchesProps = {
   colors: string[];
-  onSelectColor: (color: string) => void;
   selectedColor?: string;
+  onSelectColor: (color: string) => void;
 };
 
 export function ColorSwatches({
