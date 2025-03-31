@@ -61,11 +61,7 @@ export function ProductCard({
         {isOnSale && (
           <Badge className="absolute top-4 left-4 z-10">On Sale!</Badge>
         )}
-        <Link
-          key={id}
-          className="block h-full"
-          to={`/products/${handle}`}
-        >
+        <Link key={id} className="block h-full" to={`/products/${handle}`}>
           {variantImage && (
             <HoverableImage
               imageUrl={variantImage.url}
