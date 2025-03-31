@@ -58,7 +58,7 @@ export function ProductCard({
   return (
     <div className="flex flex-col gap-3">
       <div className="border border-[var(--color-gray)] rounded-[10px] overflow-hidden aspect-square relative p-[20px]">
-        {isOnSale && (
+        {isOnSale && originalPrice?.minVariantPrice?.amount && (
           <Badge className="absolute top-4 left-4 z-10">On Sale!</Badge>
         )}
         <Link key={id} className="block h-full" to={`/products/${handle}`}>

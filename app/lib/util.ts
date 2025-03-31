@@ -8,16 +8,24 @@ import {ColorPaletteQuery, ProductItemFragment} from 'storefrontapi.generated';
 export function getColorMap(
   colorPalette: ColorPaletteQuery['metaobjects']['edges'],
 ) {
+  if (
+    !colorPalette ||
+    !Array.isArray(colorPalette) ||
+    colorPalette.length === 0
+  ) {
+    return DEFAULT_COLOR_MAP;
+  }
+
   return (
     colorPalette.reduce((acc, edge) => {
-      const label = edge.node.label?.value?.toLowerCase();
-      const color = edge.node.color?.value;
+      const label = edge?.node?.label?.value?.toLowerCase();
+      const color = edge?.node?.color?.value;
 
       if (label && color) {
         acc[label] = color;
       }
 
-      return acc;
+      return {...DEFAULT_COLOR_MAP, ...acc};
     }, {} as Record<string, string>) ?? DEFAULT_COLOR_MAP
   );
 }

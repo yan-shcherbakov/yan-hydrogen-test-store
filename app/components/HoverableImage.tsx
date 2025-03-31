@@ -48,10 +48,15 @@ export function HoverableImage({
   }, [isHovering, hoverDelay]);
 
   // Memoize the image preloading logic
-  const preloadImage = useCallback((url: string) => {
+  const preloadImage = useCallback((url: string, signal?: AbortSignal) => {
     return new Promise((resolve, reject) => {
       const img = new window.Image();
       img.src = url;
+      // Connect the abort signal if provided
+      if (signal)
+        signal.addEventListener('abort', () =>
+          reject(new Error('Image loading aborted')),
+        );
       img.onload = () => resolve(true);
       img.onerror = () => reject(new Error('Failed to load hover image'));
     });
@@ -60,6 +65,7 @@ export function HoverableImage({
   // Preload hover image only on client side
   useEffect(() => {
     let isMounted = true;
+    const controller = new AbortController();
 
     const loadHoverImage = async () => {
       if (!hoverImageUrl) {
@@ -69,7 +75,7 @@ export function HoverableImage({
       }
 
       try {
-        await preloadImage(hoverImageUrl);
+        await preloadImage(hoverImageUrl, controller.signal);
         if (isMounted) {
           setHoverImageLoaded(true);
           setHoverImageError(false);
@@ -86,6 +92,8 @@ export function HoverableImage({
 
     return () => {
       isMounted = false;
+      // Abort any in-progress image loading
+      controller.abort();
     };
   }, [hoverImageUrl, preloadImage]);
 
@@ -102,7 +110,7 @@ export function HoverableImage({
     >
       {/* Main image */}
       <div
-        className={`absolute inset-0 transition-opacity duration-400 ${
+        className={`absolute inset-0 transition-opacity duration-300 ${
           isIntentionalHover &&
           hoverImageUrl &&
           hoverImageLoaded &&
