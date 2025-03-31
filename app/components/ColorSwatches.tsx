@@ -20,7 +20,7 @@ export function ColorSwatches({
   return (
     <div className="flex gap-2">
       {colors.map((color) => {
-        const isSelected =isColorSelected(color, selectedColor);
+        const isSelected = isColorSelected(color, selectedColor);
         const colorHex = getColorHex(color, colorMap);
 
         return (

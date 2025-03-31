@@ -114,6 +114,8 @@ async function loadCriticalData({context}: LoaderFunctionArgs) {
     // Add other queries here, so that they are loaded in parallel
   ]);
 
+  console.log('server colorPalette', JSON.stringify(colorPalette));
+
   return {header, colorPalette};
 }
 

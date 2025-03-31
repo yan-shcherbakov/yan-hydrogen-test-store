@@ -53,13 +53,19 @@ export function getColorVariants(
     .filter(Boolean);
 }
 
-export function getColorHex(colorVal: string, colorMap: Record<string, string>) {
+export function getColorHex(
+  colorVal: string,
+  colorMap: Record<string, string>,
+) {
   const color = getNormalizedColor(colorVal);
 
   return colorMap[color] || DEFAULT_COLOR;
 }
 
-export function isColorSelected(colorVal: string, selectedColorVal: string | undefined) {
+export function isColorSelected(
+  colorVal: string,
+  selectedColorVal: string | undefined,
+) {
   if (!selectedColorVal) return false;
 
   const color = getNormalizedColor(colorVal);
