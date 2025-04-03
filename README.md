@@ -2,6 +2,8 @@
 
 This is a Shopify Hydrogen storefront built with Remix and modern web technologies. The project features a comprehensive set of components for e-commerce functionality, including product browsing, variant selection, and cart management.
 
+**See this PR for the implementation: https://github.com/yan-shcherbakov/yan-hydrogen-test-store/pull/2**
+
 ## Technical Stack & Decisions
 
 - **Framework**: [Remix](https://remix.run/) for server-side rendering and routing
