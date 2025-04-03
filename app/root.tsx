@@ -16,7 +16,7 @@ import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 import tailwindCss from './styles/tailwind.css?url';
 import {PageLayout} from '~/components/PageLayout';
-import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
+import {FOOTER_QUERY, HEADER_QUERY, COLOR_QUERY} from '~/lib/fragments';
 
 export type RootLoader = typeof loader;
 
@@ -101,17 +101,20 @@ export async function loader(args: LoaderFunctionArgs) {
 async function loadCriticalData({context}: LoaderFunctionArgs) {
   const {storefront} = context;
 
-  const [header] = await Promise.all([
+  const [header, colorPalette] = await Promise.all([
     storefront.query(HEADER_QUERY, {
       cache: storefront.CacheLong(),
       variables: {
         headerMenuHandle: 'main-menu', // Adjust to your header menu handle
       },
     }),
+    storefront.query(COLOR_QUERY, {
+      cache: storefront.CacheLong(),
+    }),
     // Add other queries here, so that they are loaded in parallel
   ]);
 
-  return {header};
+  return {header, colorPalette};
 }
 
 /**
@@ -135,6 +138,7 @@ function loadDeferredData({context}: LoaderFunctionArgs) {
       console.error(error);
       return null;
     });
+
   return {
     cart: cart.get(),
     isLoggedIn: customerAccount.isLoggedIn(),
